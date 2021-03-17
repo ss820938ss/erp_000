@@ -1,8 +1,7 @@
 package erp_000.dao;
 
 import java.util.List;
-
-import erp_000.dao.dto.Department;
+import erp_000.dto.Department;
 
 public interface DepartmentDao {
 	List<Department> selectDepartmentByAll();
