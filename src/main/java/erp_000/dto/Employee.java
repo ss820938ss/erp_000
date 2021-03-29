@@ -1,9 +1,5 @@
 package erp_000.dto;
 
-import erp_000.dto.Department;
-import erp_000.dto.Employee;
-import erp_000.dto.Title;
-
 public class Employee {
 	private int empNo;
 	private String empName;

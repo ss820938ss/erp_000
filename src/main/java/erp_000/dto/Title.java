@@ -1,7 +1,5 @@
 package erp_000.dto;
 
-import erp_000.dto.Title;
-
 public class Title {
 	private int tNo;
 	private String tName;

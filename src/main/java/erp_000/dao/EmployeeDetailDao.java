@@ -12,3 +12,6 @@ public interface EmployeeDetailDao {
 	int deleteEmployeeDetail(Employee employee);
 
 }
+
+
+

@@ -87,10 +87,3 @@ public class DepartmentPanel extends AbstractContentPanel<Department>{
 		}		
 	}
 }
-
-
-
-
-
-
-

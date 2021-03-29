@@ -5,6 +5,8 @@ import java.awt.event.ActionEvent;
 import javax.swing.JOptionPane;
 
 import erp_000.dto.Employee;
+import erp_000.dto.EmployeeDetail;
+import erp_000.service.EmployeeDetailService;
 import erp_000.service.EmployeeService;
 import erp_000.ui.content.AbstractContentPanel;
 import erp_000.ui.content.EmployeePanel;
@@ -14,10 +16,16 @@ import erp_000.ui.list.EmployeeTablePanel;
 @SuppressWarnings("serial")
 public class EmployeeManagerUI extends AbstractManagerUI<Employee> {
 	private EmployeeService service;
+	private EmployeeDetailService detailService;
+	
+	public EmployeeManagerUI() {
+		empListByTitleItem.setText(AbstractManagerUI.EMP_MENU);
+	}
 	
 	@Override
 	protected void setService() {
 		service = new EmployeeService();
+		detailService = new EmployeeDetailService();
 	}
 
 	@Override
@@ -40,7 +48,19 @@ public class EmployeeManagerUI extends AbstractManagerUI<Employee> {
 
 	@Override
 	protected void actionPerformedMenuGubun() {
-		throw new UnsupportedOperationException("제공되지 않음");
+		Employee emp = pList.getItem();
+		EmployeeDetail empDetail = detailService.selectEmployeeDetailByEmpNo(emp);
+
+		//나중에 처리
+		EmployeeDetailUI frame;
+		if (empDetail == null) {
+			frame = new EmployeeDetailUI(true, detailService);
+		}else {
+			frame = new EmployeeDetailUI(false, detailService);
+			frame.setDetailItem(empDetail);
+		}
+		frame.setEmpNo(emp);
+		frame.setVisible(true);
 	}
 
 	@Override

@@ -1,17 +1,29 @@
 package erp_000;
 
-import java.awt.BorderLayout;
 import java.awt.EventQueue;
+import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
-import javax.swing.JButton;
-import java.awt.GridLayout;
 
-public class Main extends JFrame {
+import erp_000.ui.DepartmentManagerUI;
+import erp_000.ui.EmployeeManagerUI;
+import erp_000.ui.TitleManagerUI;
+
+@SuppressWarnings("serial")
+public class Main extends JFrame implements ActionListener {
 
 	private JPanel contentPane;
+	private JButton btnTitle;
+	private JButton btnDepartment;
+	private JButton btnEmployee;
+	private TitleManagerUI titleFrame;
+	private DepartmentManagerUI deptFrame;
+	private EmployeeManagerUI empFrame;
 
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -27,8 +39,22 @@ public class Main extends JFrame {
 	}
 
 	public Main() {
+		createFrame();
+		
 		initialize();
 	}
+
+	public void createFrame() {
+		titleFrame = new TitleManagerUI();
+		titleFrame.setTitle("직책 관리");
+		
+		deptFrame = new DepartmentManagerUI();
+		deptFrame.setTitle("부서 관리");
+		
+		empFrame = new EmployeeManagerUI();
+		empFrame.setTitle("사원 관리");
+	}
+
 	private void initialize() {
 		setTitle("Erp Management");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -37,15 +63,41 @@ public class Main extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(new GridLayout(1, 0, 0, 0));
-		
-		JButton btnTitle = new JButton("직책 관리");
+
+		btnTitle = new JButton("직책 관리");
+		btnTitle.addActionListener(this);
 		contentPane.add(btnTitle);
-		
-		JButton btnDepartment = new JButton("부서 관리");
+
+		btnDepartment = new JButton("부서 관리");
+		btnDepartment.addActionListener(this);
 		contentPane.add(btnDepartment);
-		
-		JButton btnEmployee = new JButton("사원 관리");
+
+		btnEmployee = new JButton("사원 관리");
+		btnEmployee.addActionListener(this);
 		contentPane.add(btnEmployee);
 	}
 
+	public void actionPerformed(ActionEvent e) {
+		if (e.getSource() == btnEmployee) {
+			actionPerformedBtnEmployee(e);
+		}
+		if (e.getSource() == btnDepartment) {
+			actionPerformedBtnDepartment(e);
+		}
+		if (e.getSource() == btnTitle) {
+			actionPerformedBtnTitle(e);
+		}
+	}
+
+	protected void actionPerformedBtnTitle(ActionEvent e) {
+		titleFrame.setVisible(true);
+	}
+	
+	protected void actionPerformedBtnDepartment(ActionEvent e) {
+		deptFrame.setVisible(true);
+	}
+	
+	protected void actionPerformedBtnEmployee(ActionEvent e) {
+		empFrame.setVisible(true);
+	}
 }
